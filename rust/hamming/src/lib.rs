@@ -1,4 +1,4 @@
-pub fn hamming_distance<'a>(left: &'a str, right: &'a str) -> Result<usize, &'a str> {
+pub fn hamming_distance(left: &str, right: &str) -> Result<usize, &'static str> {
     if left.len() != right.len() {
         return Err("inputs of different length");
     }
