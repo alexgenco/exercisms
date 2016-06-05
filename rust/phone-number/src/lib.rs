@@ -18,15 +18,16 @@ pub fn area_code(input: &str) -> Option<String> {
 }
 
 pub fn pretty_print(input: &str) -> String {
-    let result = number(input);
-    if result.is_none() { return "invalid".to_string(); }
+    if let Some(number) = number(input) {
+        let area_code = number.chars().take(3).collect::<String>();
+        let middle = number.chars().skip(3).take(3).collect::<String>();
+        let last = number.chars().skip(6).take(4).collect::<String>();
 
-    let number = result.unwrap();
-    let area_code = number.chars().take(3).collect::<String>();
-    let middle = number.chars().skip(3).take(3).collect::<String>();
-    let last = number.chars().skip(6).take(4).collect::<String>();
+        format!("({}) {}-{}", area_code, middle, last)
+    } else {
+        "invalid".to_string()
+    }
 
-    format!("({}) {}-{}", area_code, middle, last)
 }
 
 fn standardize(input: &str) -> String {
