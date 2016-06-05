@@ -10,13 +10,7 @@ impl School {
     }
 
     pub fn grades(&self) -> Vec<usize> {
-        let mut grades = Vec::new();
-
-        for key in self.students.keys() {
-            grades.push(*key);
-        }
-
-        grades
+        self.students.keys().cloned().collect()
     }
 
     pub fn add(&mut self, grade: usize, name: &str) {
