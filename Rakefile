@@ -1,6 +1,13 @@
-task :default do
+def _in(lang, shell)
   base_dir = File.expand_path("..", __FILE__)
-  Dir.glob("#{base_dir}/rust/*") do |dir|
-    Dir.chdir(dir) { sh "cargo test" }
+  Dir.glob("#{base_dir}/#{lang}/*") do |dir|
+    Dir.chdir(dir) { sh(shell) }
   end
 end
+
+namespace :test do
+  task(:rust) { _in(:rust, "cargo test") }
+  task(:bash) { _in(:bash, "bats *_test.sh") }
+end
+
+task default: ["test:rust", "test:bash"]
