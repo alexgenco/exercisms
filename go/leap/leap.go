@@ -9,7 +9,7 @@ func IsLeapYear(year int) bool {
 		return false
 	} else if year%4 == 0 {
 		return true
-	} else {
-		return false
 	}
+
+	return false
 }
